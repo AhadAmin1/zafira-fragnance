@@ -29,14 +29,26 @@ const Footer = () => (
           <h4 className="text-white text-xs font-body tracking-[0.3em] uppercase mb-2">Get in Touch</h4>
           <p className="text-sm font-body text-white/40">📍 Karachi, Pakistan</p>
           <p className="text-sm font-body text-white/40">📞 +92 309 2199720</p>
-          <p className="text-sm font-body text-white/40">✉️ support@zafira.com</p>
+          <p className="text-sm font-body text-white/40">✉️ zafirafragrances8@gmail.com</p>
         </div>
 
         <div className="flex flex-col gap-4">
-          <h4 className="text-white text-xs font-body tracking-[0.3em] uppercase mb-2">Legal</h4>
-          <p className="text-sm font-body text-white/40">© {new Date().getFullYear()} Zafira Fragrances.</p>
-          <p className="text-white/20 text-[10px] mt-1 font-body tracking-wider uppercase">All rights reserved.</p>
+          <h4 className="text-white text-xs font-body tracking-[0.3em] uppercase mb-2">Social</h4>
+          <div className="flex gap-4">
+            <a href="#" className="text-white/40 hover:text-gold transition-colors text-sm font-body">Instagram</a>
+            <a href="#" className="text-white/40 hover:text-gold transition-colors text-sm font-body">Facebook</a>
+          </div>
         </div>
+      </div>
+      
+      {/* Bottom Copyright Bar */}
+      <div className="border-t border-gold/5 mt-16 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-[10px] md:text-xs font-body tracking-[0.2em] text-white/30 uppercase">
+          © {new Date().getFullYear()} Zafira Fragrances House. All Rights Reserved.
+        </p>
+        <p className="text-[10px] md:text-xs font-body tracking-[0.2em] text-white/20 uppercase">
+          Karachi, Pakistan
+        </p>
       </div>
     </div>
   </footer>
