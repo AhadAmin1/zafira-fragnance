@@ -42,45 +42,47 @@ const ProductDetail = () => {
         <Link to="/products" className="text-muted text-sm font-body hover:text-gold transition-colors inline-block mb-10 tracking-widest uppercase">
           ← Back to Collection
         </Link>
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
           
           {/* Main Image & Gallery */}
-          <div className="md:w-1/2">
-            <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/5] border border-gold/10 relative group">
+          <div className="lg:w-1/2">
+            <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] border border-gold/10 relative group">
               <img 
                 src={product.image} 
                 alt={product.name}
-                className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-125 cursor-zoom-in"
+                className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 cursor-zoom-in"
                 onClick={() => setSelectedImage(product.image)}
                 onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=500&q=80'; }}
               />
             </div>
             {/* Additional Gallery Images */}
-            <div className="flex gap-4 mt-6">
-               {galleryImages.map((img, i) => (
-                 <div key={i} className="flex-1 rounded-xl overflow-hidden border border-gold/10 aspect-[4/5] shadow-md group relative">
-                    <img 
-                      src={img}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-125 cursor-zoom-in"
-                      alt={`Gallery ${i}`}
-                      onClick={() => setSelectedImage(img)}
-                    />
-                 </div>
-               ))}
-            </div>
+            {galleryImages.length > 0 && (
+              <div className="flex gap-3 md:gap-4 mt-4 md:mt-6 overflow-x-auto pb-2 scrollbar-hide">
+                 {galleryImages.map((img, i) => (
+                   <div key={i} className="min-w-[80px] md:min-w-[100px] flex-1 rounded-xl overflow-hidden border border-gold/10 aspect-[4/5] shadow-md group relative">
+                      <img 
+                        src={img}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 cursor-zoom-in"
+                        alt={`Gallery ${i}`}
+                        onClick={() => setSelectedImage(img)}
+                      />
+                   </div>
+                 ))}
+              </div>
+            )}
           </div>
 
           {/* Details */}
-          <div className="md:w-1/2 flex flex-col justify-center">
-            <p className="text-gold tracking-[0.3em] text-sm uppercase font-body mb-3">{product.tagline} • {product.category}</p>
-            <h1 className="font-display text-4xl lg:text-5xl text-charcoal mb-4">{product.name}</h1>
-            <p className="text-2xl font-display text-charcoal/80 mb-8 border-b border-gold/20 pb-8">
+          <div className="lg:w-1/2 flex flex-col justify-center">
+            <p className="text-gold tracking-[0.3em] text-[10px] md:text-sm uppercase font-body mb-3">{product.tagline} • {product.category}</p>
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal mb-4">{product.name}</h1>
+            <p className="text-xl md:text-2xl font-display text-charcoal/80 mb-6 md:mb-8 border-b border-gold/20 pb-6 md:pb-8">
               Rs {product.price.toLocaleString()}
             </p>
             
-            <div className="font-body text-muted leading-relaxed space-y-4 mb-10">
+            <div className="font-body text-muted text-sm md:text-base leading-relaxed space-y-4 mb-8 md:mb-10">
               <p>{product.description}</p>
-              <ul className="space-y-3 mt-6 text-sm">
+              <ul className="space-y-3 mt-6 text-xs md:text-sm">
                 <li className="flex items-center gap-3"><span className="text-gold text-lg">✦</span> 50 ML Premium Glass Bottle</li>
                 <li className="flex items-center gap-3"><span className="text-gold text-lg">✦</span> 8–9 Hours Long Lasting Guarantee</li>
                 <li className="flex items-center gap-3"><span className="text-gold text-lg">✦</span> Authentic and carefully curated</li>
@@ -89,15 +91,15 @@ const ProductDetail = () => {
 
             <button
               onClick={handleAddToCart}
-              className={`py-4 px-8 rounded-xl font-body text-sm tracking-widest uppercase transition-all duration-300 w-full mb-6 ${
+              className={`py-4 md:py-5 px-8 rounded-xl font-body text-xs md:text-sm tracking-widest uppercase transition-all duration-500 w-full mb-6 ${
                 added
-                  ? 'bg-green-500 text-white shadow-lg shadow-green-500/30'
+                  ? 'bg-green-600 text-white shadow-lg shadow-green-600/30'
                   : 'bg-charcoal text-white hover:bg-gold hover:shadow-xl hover:shadow-gold/20'
               }`}
             >
               {added ? 'Added to Cart ✓' : 'Add to Cart'}
             </button>
-            <p className="text-xs text-center text-muted font-body uppercase tracking-wider">Free delivery on orders over Rs 5,000</p>
+            <p className="text-[10px] md:text-xs text-center text-muted font-body uppercase tracking-[0.2em]">Free delivery on orders over Rs 5,000</p>
           </div>
         </div>
 

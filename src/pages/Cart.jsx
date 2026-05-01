@@ -40,47 +40,49 @@ const Cart = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cart.map(item => (
-              <div key={item.id} className="bg-white rounded-2xl p-5 flex gap-4 items-start shadow-sm border border-gold/10">
+              <div key={item.id} className="bg-white rounded-2xl p-4 md:p-5 flex gap-4 items-center shadow-sm border border-gold/10">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover flex-shrink-0"
                   onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=200&q=80'; }}
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h3 className="font-display text-charcoal text-lg">{item.name}</h3>
-                      <p className="font-body text-sm text-muted">{item.tagline}</p>
+                      <h3 className="font-display text-charcoal text-base md:text-lg truncate">{item.name}</h3>
+                      <p className="font-body text-[10px] md:text-sm text-muted truncate">{item.tagline}</p>
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-muted/50 hover:text-red-400 transition-colors text-lg flex-shrink-0 mt-0.5"
+                      className="text-muted/40 hover:text-red-500 transition-colors p-1"
                       title="Remove"
                     >
-                      ✕
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </button>
                   </div>
-                  <div className="flex items-center justify-between mt-3">
+                  <div className="flex items-center justify-between mt-2 md:mt-3">
                     {/* Qty Controls */}
-                    <div className="flex items-center gap-2 bg-cream rounded-lg px-2 py-1">
+                    <div className="flex items-center gap-1 md:gap-2 bg-cream rounded-lg px-1.5 py-0.5 md:px-2 md:py-1">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         disabled={item.quantity <= 1}
-                        className="w-6 h-6 flex items-center justify-center text-charcoal disabled:opacity-30 hover:text-gold transition-colors font-body text-lg"
+                        className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-charcoal disabled:opacity-30 hover:text-gold transition-colors font-body text-base md:text-lg"
                       >
                         −
                       </button>
-                      <span className="w-6 text-center font-body text-sm font-semibold">{item.quantity}</span>
+                      <span className="w-5 md:w-6 text-center font-body text-xs md:text-sm font-semibold">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-6 h-6 flex items-center justify-center text-charcoal hover:text-gold transition-colors font-body text-lg"
+                        className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-charcoal hover:text-gold transition-colors font-body text-base md:text-lg"
                       >
                         +
                       </button>
                     </div>
                     {/* Subtotal */}
-                    <span className="font-display text-charcoal text-lg">
+                    <span className="font-display text-charcoal text-base md:text-lg">
                       Rs {(item.price * item.quantity).toLocaleString()}
                     </span>
                   </div>

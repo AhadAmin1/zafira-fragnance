@@ -11,36 +11,48 @@ const Products = () => {
   const filtered = active === 'All' ? products : products.filter(p => p.category === active);
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="pt-32 pb-16 px-4 text-center bg-charcoal">
-        <p className="text-gold tracking-[0.4em] text-xs uppercase font-body mb-3">Our Collection</p>
-        <h1 className="font-display text-5xl md:text-6xl text-white">All Perfumes</h1>
-        <div className="w-12 h-px bg-gold mx-auto mt-6" />
-      </section>
-
-      {/* Filters */}
-      <section className="sticky top-16 z-40 bg-cream/90 backdrop-blur-md border-b border-gold/10 py-4 px-4">
-        <div className="max-w-6xl mx-auto flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`whitespace-nowrap px-5 py-2 rounded-full text-sm font-body tracking-wider transition-all duration-200 ${
-                active === cat
-                  ? 'bg-charcoal text-white'
-                  : 'bg-white border border-gold/20 text-muted hover:border-gold/50 hover:text-charcoal'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section for Products */}
+      <section className="bg-charcoal pt-32 pb-20 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, #C9A96E 1px, transparent 0)`,
+            backgroundSize: '30px 30px'
+          }}
+        />
+        <div className="relative max-w-7xl mx-auto text-center">
+          <div className="inline-block px-4 py-1 border border-gold/30 rounded-full mb-6">
+            <span className="text-gold text-[10px] tracking-[0.4em] uppercase font-body font-bold">The Collection</span>
+          </div>
+          <h1 className="font-display text-5xl md:text-7xl text-white mb-6">Our <em className="text-gold">Fragrances</em></h1>
+          <p className="font-body text-white/40 text-sm md:text-base max-w-xl mx-auto tracking-wide">
+            Explore our curated selection of fine attars and perfumes, crafted for the discerning individual.
+          </p>
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <p className="font-body text-sm text-muted mb-8">{filtered.length} products</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        {/* Category Filters */}
+        <div className="flex flex-col items-center mb-16">
+          <div className="flex items-center gap-4 mb-8 overflow-x-auto scrollbar-hide w-full justify-start md:justify-center px-4">
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => setActive(category)}
+                className={`whitespace-nowrap px-8 py-3 rounded-full font-body text-xs tracking-[0.2em] uppercase transition-all duration-500 border ${
+                  active === category
+                    ? 'bg-charcoal text-white border-charcoal shadow-xl'
+                    : 'bg-transparent text-muted border-gold/20 hover:border-gold hover:text-gold'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <div className="w-24 h-px bg-gold/20" />
+        </div>
+
+        {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((product, i) => (
             <div key={product.id} className="opacity-0 animate-fade-up" style={{ animationDelay: `${i * 0.07}s`, animationFillMode: 'forwards' }}>
@@ -48,7 +60,7 @@ const Products = () => {
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>

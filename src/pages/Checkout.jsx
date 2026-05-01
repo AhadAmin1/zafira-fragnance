@@ -9,8 +9,6 @@ const Checkout = () => {
   const { cart, totalPrice, clearCart } = useCart();
   const navigate = useNavigate();
   
-  const [paymentMethod, setPaymentMethod] = useState('cod');
-  const [onlineMethod, setOnlineMethod] = useState('easypaisa');
   const [orderPlaced, setOrderPlaced] = useState(false);
 
   if (orderPlaced) {
@@ -46,11 +44,9 @@ const Checkout = () => {
   }
 
   const handlePlaceOrder = () => {
-    let methodText = paymentMethod === 'cod' ? 'Cash on Delivery' : `Online Payment (${onlineMethod === 'easypaisa' ? 'Easypaisa' : onlineMethod === 'jazzcash' ? 'JazzCash' : 'SadaPay'})`;
-    
     const message = `Hello, Zafira Fragrances! I would like to confirm my order:%0A%0A${cart
       .map(item => `${item.quantity}x ${item.name} - Rs ${(item.price * item.quantity).toLocaleString()}`)
-      .join('%0A')}%0A%0A*Total: Rs ${totalPrice.toLocaleString()}*%0A%0A*Payment Method:* ${methodText}%0A%0APlease let me know the next steps.`;
+      .join('%0A')}%0A%0A*Total: Rs ${totalPrice.toLocaleString()}*%0A%0A*Payment Method:* Online Payment (JazzCash)%0A%0APlease let me know the next steps.`;
     
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const url = isMobile 
@@ -64,20 +60,20 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
-      <section className="pt-32 pb-16 px-4 text-center bg-charcoal">
-        <h1 className="font-display text-4xl md:text-5xl text-white">Checkout</h1>
+      <section className="pt-28 md:pt-36 pb-12 md:pb-16 px-4 text-center bg-charcoal">
+        <h1 className="font-display text-3xl md:text-5xl text-white">Checkout</h1>
       </section>
 
       <section className="flex-1 max-w-4xl mx-auto w-full px-4 py-16">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gold/10 p-6 md:p-10">
-          <h2 className="text-2xl font-display text-charcoal border-b border-gold/20 pb-4 mb-6">Order Summary</h2>
+          <h2 className="text-xl md:text-2xl font-display text-charcoal border-b border-gold/20 pb-4 mb-6">Order Summary</h2>
           {cart.map(item => (
-            <div key={item.id} className="flex justify-between items-center mb-4 text-muted font-body">
-              <span>{item.quantity}x {item.name}</span>
-              <span className="text-charcoal font-medium">Rs {(item.price * item.quantity).toLocaleString()}</span>
+            <div key={item.id} className="flex justify-between items-center mb-4 text-muted font-body text-sm md:text-base">
+              <span className="truncate mr-4">{item.quantity}x {item.name}</span>
+              <span className="text-charcoal font-medium flex-shrink-0">Rs {(item.price * item.quantity).toLocaleString()}</span>
             </div>
           ))}
-          <div className="flex justify-between items-center border-t border-gold/10 pt-4 mt-4 font-display text-xl text-charcoal">
+          <div className="flex justify-between items-center border-t border-gold/10 pt-4 mt-4 font-display text-lg md:text-xl text-charcoal">
             <span>Total to Pay</span>
             <span className="text-gold">Rs {totalPrice.toLocaleString()}</span>
           </div>
@@ -85,75 +81,45 @@ const Checkout = () => {
           <h2 className="text-2xl font-display text-charcoal border-b border-gold/20 pb-4 mt-12 mb-6">Payment Method</h2>
           
           <div className="space-y-4">
-            <label className={`block w-full border rounded-xl p-4 cursor-pointer transition-colors ${paymentMethod === 'cod' ? 'border-gold bg-gold/5' : 'border-black/10 hover:bg-black/5'}`}>
-              <div className="flex items-center gap-3">
-                <input 
-                  type="radio" 
-                  name="payment" 
-                  value="cod" 
-                  checked={paymentMethod === 'cod'}
-                  onChange={() => setPaymentMethod('cod')}
-                  className="w-5 h-5 accent-gold"
-                />
-                <span className="font-body text-charcoal text-lg">Cash on Delivery</span>
-              </div>
-              {paymentMethod === 'cod' && <p className="text-sm text-muted mt-2 ml-8">Pay with cash when your order is delivered to your doorstep.</p>}
-            </label>
-
-            <label className={`block w-full border rounded-xl p-4 cursor-pointer transition-colors ${paymentMethod === 'online' ? 'border-gold bg-gold/5' : 'border-black/10 hover:bg-black/5'}`}>
-              <div className="flex items-center gap-3">
-                <input 
-                  type="radio" 
-                  name="payment" 
-                  value="online" 
-                  checked={paymentMethod === 'online'}
-                  onChange={() => setPaymentMethod('online')}
-                  className="w-5 h-5 accent-gold"
-                />
-                <span className="font-body text-charcoal text-lg">Online Payment</span>
+            <div className="block w-full border border-gold bg-gold/5 rounded-xl p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-5 h-5 rounded-full border-4 border-gold bg-white"></div>
+                <span className="font-body text-charcoal text-lg font-medium">Online Payment (JazzCash Only)</span>
               </div>
               
-              {paymentMethod === 'online' && (
-                <div className="mt-4 ml-8">
-                  <p className="text-sm text-muted mb-4">Please select your preferred digital payment method:</p>
-                  <div className="flex flex-wrap gap-4 mb-6">
-                    {['easypaisa', 'jazzcash', 'sadapay'].map((method) => (
-                      <button
-                        key={method}
-                        type="button"
-                        onClick={() => setOnlineMethod(method)}
-                        className={`px-6 py-2 rounded-full text-sm font-body tracking-wide border transition-all ${
-                          onlineMethod === method ? 'bg-charcoal text-white border-charcoal' : 'bg-white text-muted border-black/10 hover:border-gold'
-                        }`}
-                      >
-                        {method.charAt(0).toUpperCase() + method.slice(1)}
-                      </button>
-                    ))}
+              <div className="bg-white p-6 rounded-2xl border border-gold/20 shadow-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-gold/10 p-2 rounded-lg text-gold font-bold text-xs">JazzCash</div>
+                  <p className="font-body text-xs text-charcoal font-bold uppercase tracking-[0.2em]">
+                    Transfer Details
+                  </p>
+                </div>
+                
+                <div className="space-y-4 mt-4 text-sm text-muted">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[10px] uppercase tracking-widest opacity-60 font-bold">Account Name</span>
+                    <span className="text-charcoal font-display text-lg">Muhammad Rayyan Siddiqui</span>
                   </div>
-
-                  <div className="bg-white p-4 rounded-lg border border-gold/20 shadow-sm">
-                    <p className="font-body text-sm text-charcoal font-medium uppercase tracking-widest mb-2 border-b border-black/5 pb-2">
-                      Transfer Details
-                    </p>
-                    <div className="space-y-2 mt-3 text-sm text-muted">
-                      <p className="flex justify-between"><span>Account Title:</span> <span className="text-charcoal font-medium">Zafira Fragrances</span></p>
-                      <p className="flex justify-between"><span>Account Number:</span> <span className="text-gold font-medium text-lg">+92 309 2199720</span></p>
-                      <p className="flex justify-between"><span>Bank/Operator:</span> <span className="text-charcoal font-medium capitalize">{onlineMethod}</span></p>
-                    </div>
-                    <p className="text-xs text-charcoal/70 mt-4 bg-gold/10 p-2 rounded text-center">
-                      Please send Rs {totalPrice.toLocaleString()} to this number and share the screenshot on WhatsApp.
-                    </p>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[10px] uppercase tracking-widest opacity-60 font-bold">Account Number</span>
+                    <span className="text-gold font-body text-2xl tracking-wider font-bold">0332 3592771</span>
                   </div>
                 </div>
-              )}
-            </label>
+
+                <div className="text-center mt-8 bg-charcoal text-white/90 p-4 rounded-xl text-xs leading-relaxed">
+                  <p className="mb-2">1. Transfer <strong>Rs {totalPrice.toLocaleString()}</strong> via JazzCash</p>
+                  <p>2. Take a screenshot and share it on WhatsApp</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <button
             onClick={handlePlaceOrder}
-            className="w-full mt-10 bg-charcoal text-white hover:bg-gold py-5 px-8 rounded-xl font-body text-base tracking-widest uppercase transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            className="w-full mt-10 bg-charcoal text-white hover:bg-gold py-5 px-8 rounded-xl font-body text-base tracking-widest uppercase transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-3"
           >
-            Confirm Order via WhatsApp
+            <span>Proceed to WhatsApp</span>
+            <span className="text-xl">→</span>
           </button>
         </div>
       </section>

@@ -11,43 +11,56 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-charcoal">
-        {/* Background texture */}
+        {/* Advanced Background Texture */}
         <div className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 20% 50%, #C9A96E22 0%, transparent 60%),
-                              radial-gradient(ellipse at 80% 20%, #C9A96E11 0%, transparent 50%)`,
+            backgroundImage: `radial-gradient(circle at 2px 2px, #C9A96E 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-transparent to-charcoal opacity-60" />
+        
+        {/* Floating Light Effects */}
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gold/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gold/10 rounded-full blur-[120px] animate-pulse delay-700" />
 
-        {/* Decorative lines */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3">
-          <div className="w-px h-24 bg-gold/30" />
-          <span className="text-gold/40 text-xs tracking-[0.3em] -rotate-90 my-8 font-body">LUXURY</span>
-          <div className="w-px h-24 bg-gold/30" />
+        {/* Vertical Brand Line */}
+        <div className="absolute left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-6">
+          <div className="w-px h-32 bg-gradient-to-b from-transparent via-gold/40 to-transparent" />
+          <span className="text-gold/30 text-[10px] tracking-[0.6em] -rotate-90 my-12 font-body font-bold whitespace-nowrap">EST. 2024 • LUXURY HOUSE</span>
+          <div className="w-px h-32 bg-gradient-to-b from-transparent via-gold/40 to-transparent" />
         </div>
 
-        <div className="relative text-center px-4 max-w-4xl mx-auto">
-          <p className="text-gold tracking-[0.4em] text-xs uppercase font-body mb-6 opacity-0 animate-fade-up animate-delay-100">
-            ✦ Premium Collection ✦
-          </p>
-          <h1 className="font-display text-5xl sm:text-6xl md:text-8xl text-white leading-none mb-6 opacity-0 animate-fade-up animate-delay-200">
+        <div className="relative text-center px-6 max-w-5xl mx-auto z-10">
+          <div className="inline-flex items-center gap-4 mb-8 opacity-0 animate-fade-up animate-delay-100">
+            <div className="w-8 h-px bg-gold/50" />
+            <p className="text-gold tracking-[0.5em] text-[10px] md:text-xs uppercase font-body font-bold">
+              Premium Collection
+            </p>
+            <div className="w-8 h-px bg-gold/50" />
+          </div>
+
+          <h1 className="font-display text-5xl sm:text-7xl md:text-9xl text-white leading-[0.9] mb-8 opacity-0 animate-fade-up animate-delay-200">
             The Art of
             <br />
-            <em className="text-gold not-italic">Fragrance</em>
+            <span className="text-gold italic font-light">Fragrance</span>
           </h1>
-          <p className="font-body text-white/50 text-lg max-w-md mx-auto mb-10 opacity-0 animate-fade-up animate-delay-300">
+
+          <p className="font-body text-white/50 text-base md:text-xl max-w-xl mx-auto mb-12 opacity-0 animate-fade-up animate-delay-300 leading-relaxed">
             Discover scents that tell your story. Handpicked luxury perfumes crafted for those who dare to be memorable.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-up animate-delay-400">
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fade-up animate-delay-400">
             <Link
               to="/products"
-              className="bg-gold text-white px-8 py-3.5 rounded-xl font-body text-sm tracking-wider uppercase hover:bg-gold/90 transition-all duration-300 shadow-lg shadow-gold/20"
+              className="group relative bg-gold text-white px-10 py-4 rounded-full font-body text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:shadow-[0_0_40px_rgba(201,169,110,0.3)] overflow-hidden"
             >
-              Shop Now
+              <span className="relative z-10">Shop Now</span>
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
             </Link>
             <Link
               to="/products"
-              className="border border-white/20 text-white/70 px-8 py-3.5 rounded-xl font-body text-sm tracking-wider uppercase hover:border-gold/50 hover:text-gold transition-all duration-300"
+              className="group border border-white/20 text-white/70 px-10 py-4 rounded-full font-body text-xs tracking-[0.3em] uppercase hover:border-gold/50 hover:text-gold transition-all duration-500"
             >
               View Collection
             </Link>
@@ -55,9 +68,9 @@ const Home = () => {
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-up animate-delay-500">
-          <span className="text-white/30 text-xs tracking-widest font-body">SCROLL</span>
-          <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-0 animate-fade-up animate-delay-500">
+          <div className="w-[1px] h-16 bg-gradient-to-b from-gold/50 via-gold/10 to-transparent animate-bounce-slow" />
+          <span className="text-gold/40 text-[9px] tracking-[0.5em] font-body uppercase">Scroll</span>
         </div>
       </section>
 
@@ -126,20 +139,20 @@ const Home = () => {
                 </div>
 
                 {/* Content Box with Glassmorphism */}
-                <div className="absolute -bottom-10 left-6 right-6 bg-white/90 backdrop-blur-xl p-8 rounded-2xl shadow-xl border border-gold/10 transition-all duration-500 transform group-hover:-translate-y-2">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-[10px] font-body tracking-widest text-gold uppercase">{ad.date}</span>
+                <div className="absolute -bottom-6 md:-bottom-10 left-4 right-4 md:left-6 md:right-6 bg-white/90 backdrop-blur-xl p-5 md:p-8 rounded-2xl shadow-xl border border-gold/10 transition-all duration-500 transform group-hover:-translate-y-2">
+                  <div className="flex items-center gap-4 mb-3 md:mb-4">
+                    <span className="text-[9px] md:text-[10px] font-body tracking-widest text-gold uppercase">{ad.date}</span>
                     <div className="flex-1 h-px bg-gold/10" />
                   </div>
-                  <h3 className="font-display text-2xl lg:text-3xl text-charcoal mb-4 group-hover:text-gold transition-colors duration-300">
+                  <h3 className="font-display text-xl lg:text-3xl text-charcoal mb-3 md:mb-4 group-hover:text-gold transition-colors duration-300">
                     {ad.title}
                   </h3>
-                  <p className="font-body text-muted text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-all duration-500 h-0 group-hover:h-auto overflow-hidden">
+                  <p className="font-body text-muted text-xs md:text-sm leading-relaxed mb-4 md:mb-6 opacity-0 group-hover:opacity-100 transition-all duration-500 h-0 group-hover:h-auto overflow-hidden">
                     {ad.description}
                   </p>
                   <Link 
                     to={ad.link}
-                    className="inline-flex items-center gap-3 text-charcoal font-body text-xs tracking-[0.2em] uppercase font-bold group/btn"
+                    className="inline-flex items-center gap-3 text-charcoal font-body text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold group/btn"
                   >
                     <span className="relative">
                       Explore Collection
