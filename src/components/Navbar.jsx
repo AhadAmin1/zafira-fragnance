@@ -64,11 +64,13 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <Link to="/" onClick={closeMenu} className="flex items-center gap-3 group relative z-[1001]">
-              <div className="relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10">
-                <div className={`absolute inset-0 border-2 rounded-full transition-all duration-700 ${isLightMode ? 'border-gold/30 group-hover:border-gold/60' : 'border-white/20 group-hover:border-white/50'}`}></div>
-                <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-gold drop-shadow-md group-hover:scale-110 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 12h-4.5l4.5-5.5V8h-6v2h4.5L10.5 15.5V17h6v-2z"/>
-                </svg>
+              <div className="relative flex items-center justify-center w-9 h-9 md:w-11 md:h-11 overflow-hidden">
+                <div className={`absolute inset-0 border border-gold/30 rounded-full transition-all duration-700 ${isLightMode ? 'group-hover:border-gold' : 'group-hover:border-white'}`}></div>
+                <img 
+                  src="/products/logo.jpeg" 
+                  alt="Zafira Logo" 
+                  className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
               <div className="flex flex-col -gap-1">
                 <span className={`font-display font-bold tracking-[0.25em] leading-none transition-all duration-500 ${isLightMode ? 'text-lg md:text-xl text-charcoal' : 'text-xl md:text-2xl text-white'}`}>ZAFIRA</span>
